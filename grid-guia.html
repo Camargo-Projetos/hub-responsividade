@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grid na Prática</title>
+  <!-- Estilo global do hub -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- Estilo compartilhado das páginas-guia -->
+  <link rel="stylesheet" href="guia.css" />
+  <!-- Estilo local -->
+  <link rel="stylesheet" href="grid-guia.css" />
+</head>
+<body>
+
+  <header class="subpage-header">
+    <h1>Grid na Prática</h1>
+    <p>Como o CSS Grid divide a página em linhas e colunas e posiciona cada elemento nelas.</p>
+  </header>
+
+  <main class="content-container guia">
+
+    <nav class="sumario" aria-label="Nesta página">
+      <a href="#conceito">1. Conceito</a>
+      <a href="#colunas-linhas">2. Colunas e linhas</a>
+      <a href="#posicionar">3. Posicionar itens</a>
+      <a href="#areas">4. Áreas nomeadas</a>
+      <a href="#alinhar">5. Alinhamento</a>
+      <a href="#responsivo">6. Grid responsivo</a>
+      <a href="#resumo">7. Resumo</a>
+      <a href="#pratica">8. Teste prático</a>
+    </nav>
+
+    <!-- ========== 1. CONCEITO ========== -->
+    <section id="conceito">
+      <h2>🔹 1. O que é o CSS Grid</h2>
+      <p>
+        O <strong>CSS Grid Layout</strong> organiza elementos em <strong>duas dimensões</strong>:
+        linhas e colunas ao mesmo tempo. Você desenha a grade no contêiner e os filhos diretos
+        ocupam as células.
+      </p>
+
+<pre><code>.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}</code></pre>
+
+      <h3>Vocabulário básico</h3>
+      <div class="tabela-wrap">
+        <table>
+          <thead>
+            <tr><th>Termo</th><th>Significado</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Contêiner (grid container)</td><td>O elemento com <code>display: grid</code></td></tr>
+            <tr><td>Item (grid item)</td><td>Filho direto do contêiner</td></tr>
+            <tr><td>Coluna e linha (trilhas)</td><td>Os espaços verticais e horizontais da grade</td></tr>
+            <tr><td>Célula</td><td>Cruzamento de uma linha com uma coluna</td></tr>
+            <tr><td>Linha de grade (grid line)</td><td>A divisão entre trilhas. É numerada a partir de 1</td></tr>
+            <tr><td>Área</td><td>Região formada por uma ou mais células</td></tr>
+            <tr><td><code>fr</code></td><td>Fração do espaço livre do contêiner</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="dica">
+        💡 <strong>Flexbox ou Grid?</strong> O Flexbox organiza em uma direção por vez, a partir do conteúdo.
+        O Grid organiza em duas direções, a partir do layout. Os dois se combinam bem.
+        Veja a <a href="flexbox-guia.html" style="color:#00d8ff;">página de Flexbox</a>.
+      </div>
+    </section>
+
+    <!-- ========== 2. COLUNAS E LINHAS ========== -->
+    <section id="colunas-linhas">
+      <h2>🧩 2. Dividindo em colunas e linhas</h2>
+
+      <h3>2.1 grid-template-columns</h3>
+      <p>Cada valor da lista cria uma coluna. A unidade <code>fr</code> divide o espaço que sobra.</p>
+
+      <p class="rotulo"><code>grid-template-columns: repeat(3, 1fr)</code> — 3 colunas iguais</p>
+      <div class="demo gd gd-3col">
+        <div>1</div><div>2</div><div>3</div>
+        <div>4</div><div>5</div><div>6</div>
+      </div>
+
+      <p class="rotulo"><code>grid-template-columns: 120px 1fr</code> — uma coluna fixa e uma flexível</p>
+      <div class="demo gd gd-fixo-fr">
+        <div>120px</div><div>1fr (o resto)</div>
+        <div>120px</div><div>1fr (o resto)</div>
+      </div>
+
+      <p class="rotulo"><code>grid-template-columns: 1fr 2fr 1fr</code> — a coluna do meio é duas vezes maior</p>
+      <div class="demo gd gd-proporcao">
+        <div>1fr</div><div>2fr</div><div>1fr</div>
+      </div>
+
+      <div class="dica">
+        <code>repeat(3, 1fr)</code> é o mesmo que escrever <code>1fr 1fr 1fr</code>.
+        Quando os itens passam do número de colunas, o Grid cria novas <strong>linhas</strong> automaticamente.
+      </div>
+
+      <h3>2.2 grid-template-rows e grid-auto-rows</h3>
+      <p>
+        <code>grid-template-rows</code> define a altura das linhas que você declarou.
+        <code>grid-auto-rows</code> define a altura das linhas criadas automaticamente.
+      </p>
+
+      <p class="rotulo"><code>grid-template-rows: 60px 110px</code></p>
+      <div class="demo gd gd-linhas">
+        <div>1</div><div>2</div><div>3</div>
+        <div>4</div><div>5</div><div>6</div>
+      </div>
+
+      <p class="rotulo"><code>grid-auto-rows: 70px</code> — todas as linhas com 70px</p>
+      <div class="demo gd gd-auto-rows">
+        <div>1</div><div>2</div><div>3</div>
+        <div>4</div><div>5</div><div>6</div>
+        <div>7</div><div>8</div><div>9</div>
+      </div>
+
+      <h3>2.3 gap</h3>
+      <p>
+        Cria espaço entre as linhas e as colunas. A forma completa é
+        <code>gap: espaço-entre-linhas espaço-entre-colunas</code>.
+      </p>
+
+      <p class="rotulo"><code>gap: 25px 10px</code></p>
+      <div class="demo gd gd-gap">
+        <div>A</div><div>B</div><div>C</div>
+        <div>D</div><div>E</div><div>F</div>
+      </div>
+    </section>
+
+    <!-- ========== 3. POSICIONAR ========== -->
+    <section id="posicionar">
+      <h2>📍 3. Posicionando e expandindo itens</h2>
+      <p>
+        As linhas de grade são numeradas. Uma grade com 3 colunas tem <strong>4</strong> linhas verticais
+        (1, 2, 3 e 4). O último número também pode ser escrito como <code>-1</code>.
+      </p>
+
+<pre><code>/* ocupa da linha 1 até a linha 3 (2 colunas) */
+grid-column: 1 / 3;
+
+/* equivalente, usando span (ocupar 2 colunas) */
+grid-column: span 2;
+
+/* ocupa da linha 2 até a linha 4 (2 linhas) */
+grid-row: 2 / 4;</code></pre>
+
+      <p class="rotulo">Exemplo: A ocupa 2 colunas e C ocupa 2 linhas. Os outros itens preenchem os espaços livres.</p>
+      <div class="demo gd gd-span">
+        <div class="sp-a">A (1 / 3)</div>
+        <div>B</div>
+        <div class="sp-c">C (linhas 2 / 4)</div>
+        <div>D</div><div>E</div><div>F</div><div>G</div>
+      </div>
+
+      <p class="rotulo"><code>grid-column: 1 / -1</code> — ocupa a largura inteira, não importa quantas colunas existam</p>
+      <div class="demo gd gd-span-total">
+        <div class="sp-titulo">Título (1 / -1)</div>
+        <div>1</div><div>2</div><div>3</div>
+      </div>
+    </section>
+
+    <!-- ========== 4. ÁREAS ========== -->
+    <section id="areas">
+      <h2>🗺️ 4. Áreas nomeadas</h2>
+      <p>
+        Com <code>grid-template-areas</code> você desenha o layout em texto. Cada palavra é o nome
+        de uma área, e cada linha de texto é uma linha da grade. Depois, cada item escolhe sua
+        área com <code>grid-area</code>.
+      </p>
+
+<pre><code>.layout {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-areas:
+    "topo   topo"
+    "menu   conteudo"
+    "rodape rodape";
+}
+
+.topo     { grid-area: topo; }
+.menu     { grid-area: menu; }
+.conteudo { grid-area: conteudo; }
+.rodape   { grid-area: rodape; }</code></pre>
+
+      <div class="demo gd gd-areas">
+        <div class="topo">topo</div>
+        <div class="menu">menu</div>
+        <div class="conteudo">conteúdo</div>
+        <div class="rodape">rodapé</div>
+      </div>
+
+      <div class="dica">
+        📱 Em telas de até 600px, o CSS redesenha as áreas em uma única coluna
+        (topo, menu, conteúdo, rodapé). Reduza a janela para ver. Esta é a grande vantagem
+        das áreas: mudar o layout sem mexer no HTML.
+      </div>
+    </section>
+
+    <!-- ========== 5. ALINHAMENTO ========== -->
+    <section id="alinhar">
+      <h2>🎯 5. Alinhamento dentro das células</h2>
+      <p>
+        Por padrão, os itens esticam para preencher a célula. Use <code>align-items</code>
+        (vertical) e <code>justify-items</code> (horizontal) para mudar isso. O atalho
+        <code>place-items: vertical horizontal</code> define os dois de uma vez.
+      </p>
+
+      <p class="rotulo"><code>place-items: center</code></p>
+      <div class="demo gd gd-alinha al-centro">
+        <div>1</div><div>2</div><div>3</div>
+      </div>
+
+      <p class="rotulo"><code>place-items: start</code></p>
+      <div class="demo gd gd-alinha al-inicio">
+        <div>1</div><div>2</div><div>3</div>
+      </div>
+
+      <p class="rotulo"><code>place-items: end</code></p>
+      <div class="demo gd gd-alinha al-fim">
+        <div>1</div><div>2</div><div>3</div>
+      </div>
+
+      <p>Para um único item, use <code>align-self</code>, <code>justify-self</code> ou <code>place-self</code>.</p>
+    </section>
+
+    <!-- ========== 6. RESPONSIVO ========== -->
+    <section id="responsivo">
+      <h2>📱 6. Grid responsivo</h2>
+
+      <h3>6.1 Com media query</h3>
+      <p>Troque o número de colunas conforme a largura da tela. Reduza a janela abaixo de 600px.</p>
+
+<pre><code>.galeria {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+@media (max-width: 600px) {
+  .galeria {
+    grid-template-columns: 1fr;   /* uma coluna só */
+  }
+}</code></pre>
+
+      <div class="demo gd gd-resp">
+        <div>1</div><div>2</div><div>3</div>
+        <div>4</div><div>5</div><div>6</div>
+      </div>
+
+      <h3>6.2 Sem media query: auto-fit e minmax</h3>
+      <p>
+        <code>minmax(140px, 1fr)</code> diz que cada coluna tem no mínimo 140px e no máximo uma
+        fração do espaço. Com <code>auto-fit</code>, o navegador calcula sozinho quantas colunas cabem.
+      </p>
+
+<pre><code>.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+}</code></pre>
+
+      <div class="demo gd gd-auto">
+        <div>1</div><div>2</div><div>3</div>
+        <div>4</div><div>5</div><div>6</div>
+      </div>
+
+      <h3>6.3 auto-fit ou auto-fill?</h3>
+      <p>
+        A diferença aparece quando há <strong>poucos itens</strong>. O <code>auto-fill</code> mantém as colunas
+        vazias. O <code>auto-fit</code> recolhe as colunas vazias, e os itens esticam.
+      </p>
+
+      <p class="rotulo"><code>repeat(auto-fit, minmax(140px, 1fr))</code> — 3 itens esticados</p>
+      <div class="demo gd gd-fit">
+        <div>1</div><div>2</div><div>3</div>
+      </div>
+
+      <p class="rotulo"><code>repeat(auto-fill, minmax(140px, 1fr))</code> — sobram colunas vazias à direita</p>
+      <div class="demo gd gd-fill">
+        <div>1</div><div>2</div><div>3</div>
+      </div>
+    </section>
+
+    <!-- ========== 7. RESUMO ========== -->
+    <section id="resumo">
+      <h2>📋 7. Resumo</h2>
+
+      <h3>Propriedades do contêiner</h3>
+      <div class="tabela-wrap">
+        <table>
+          <thead>
+            <tr><th>Propriedade</th><th>Função</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>display: grid</code></td><td>Ativa o Grid</td></tr>
+            <tr><td><code>grid-template-columns</code></td><td>Define as colunas</td></tr>
+            <tr><td><code>grid-template-rows</code></td><td>Define as linhas</td></tr>
+            <tr><td><code>grid-auto-rows</code></td><td>Altura das linhas criadas automaticamente</td></tr>
+            <tr><td><code>gap</code></td><td>Espaço entre linhas e colunas</td></tr>
+            <tr><td><code>grid-template-areas</code></td><td>Desenha o layout com nomes de áreas</td></tr>
+            <tr><td><code>place-items</code></td><td>Alinha os itens dentro das células</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Propriedades dos itens</h3>
+      <div class="tabela-wrap">
+        <table>
+          <thead>
+            <tr><th>Propriedade</th><th>Função</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>grid-column</code></td><td>Posição e largura em colunas (<code>1 / 3</code>, <code>span 2</code>)</td></tr>
+            <tr><td><code>grid-row</code></td><td>Posição e altura em linhas</td></tr>
+            <tr><td><code>grid-area</code></td><td>Escolhe uma área nomeada</td></tr>
+            <tr><td><code>place-self</code></td><td>Alinhamento individual</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Flexbox × Grid</h3>
+      <div class="tabela-wrap">
+        <table>
+          <thead>
+            <tr><th>Critério</th><th>Flexbox</th><th>Grid</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Dimensões</td><td>Uma (linha <em>ou</em> coluna)</td><td>Duas (linhas <em>e</em> colunas)</td></tr>
+            <tr><td>Ponto de partida</td><td>O conteúdo dos itens</td><td>O desenho da grade</td></tr>
+            <tr><td>Bom para</td><td>Menus, barras, alinhamentos, componentes</td><td>Layout de página, galerias, painéis</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ========== 8. TESTE PRÁTICO ========== -->
+    <section id="pratica">
+      <h2>🧪 8. Teste prático</h2>
+      <p>
+        Abra o arquivo <strong>grid-guia.css</strong>, procure a regra <code>.gd-lab</code> e
+        faça os desafios abaixo. Salve e atualize a página a cada mudança.
+      </p>
+
+      <div class="demo gd-lab">
+        <div>1</div><div>2</div><div>3</div>
+        <div>4</div><div>5</div><div>6</div>
+      </div>
+
+      <ol>
+        <li>Mude para 2 colunas, depois para 4 colunas.</li>
+        <li>Faça a primeira coluna ter o dobro da largura das outras (<code>2fr 1fr 1fr</code>).</li>
+        <li>Altere o <code>gap</code> para <code>30px 5px</code> e observe a diferença.</li>
+        <li>Faça o item 1 ocupar a linha inteira com <code>grid-column: 1 / -1</code>.</li>
+        <li>Use <code>repeat(auto-fit, minmax(120px, 1fr))</code> e reduza a janela do navegador.</li>
+      </ol>
+    </section>
+
+    <div class="navegacao">
+      <a href="flexbox-guia.html" class="back-link">⬅ Anterior: Flexbox na Prática</a>
+      <a href="index.html" class="back-link">Voltar ao Hub ➡</a>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>Baseado no material do Prof. Dionatan Inhoato Markiu</p>
+  </footer>
+
+</body>
+</html>

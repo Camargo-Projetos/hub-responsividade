@@ -1,0 +1,156 @@
+/* =====================================================
+   flexbox-guia.css — demonstrações da página Flexbox
+   ===================================================== */
+
+/* ===== Base: todo exemplo é um contêiner flex ===== */
+.fx {
+  display: flex;
+  gap: 10px;
+}
+
+.fx > div {
+  min-width: 56px;
+}
+
+/* ===== flex-direction ===== */
+.fx-row            { flex-direction: row; }
+.fx-row-reverse    { flex-direction: row-reverse; }
+.fx-column         { flex-direction: column; }
+.fx-column-reverse { flex-direction: column-reverse; }
+
+/* ===== flex-wrap ===== */
+.fx-nowrap { flex-wrap: nowrap; overflow-x: auto; }
+.fx-wrap   { flex-wrap: wrap; }
+
+.fx-nowrap > div,
+.fx-wrap > div {
+  flex: 0 0 120px;
+}
+
+/* ===== justify-content (eixo principal) ===== */
+.jc-start   { justify-content: flex-start; }
+.jc-center  { justify-content: center; }
+.jc-end     { justify-content: flex-end; }
+.jc-between { justify-content: space-between; }
+.jc-around  { justify-content: space-around; }
+.jc-evenly  { justify-content: space-evenly; }
+
+/* ===== align-items (eixo transversal) ===== */
+.fx-align {
+  min-height: 120px;
+}
+
+.ai-stretch  { align-items: stretch; }
+.ai-start    { align-items: flex-start; }
+.ai-center   { align-items: center; }
+.ai-end      { align-items: flex-end; }
+.ai-baseline { align-items: baseline; }
+
+.fonte-p { font-size: 1rem; }
+.fonte-m { font-size: 1.4rem; }
+.fonte-g { font-size: 2rem; }
+
+/* ===== align-content (várias linhas) ===== */
+.fx-ac {
+  flex-wrap: wrap;
+  height: 220px;
+  align-content: space-between;
+}
+
+.fx-ac > div {
+  flex: 0 0 30%;
+}
+
+/* ===== flex-grow ===== */
+.grow-1 { flex-grow: 1; }
+.grow-2 { flex-grow: 2; }
+
+/* ===== flex-shrink ===== */
+.fx-shrink {
+  overflow-x: auto;
+}
+
+.fx-shrink > div {
+  flex-basis: 400px;
+}
+
+.shrink-0 { flex-shrink: 0; }
+
+/* ===== flex-basis ===== */
+.fx-basis { overflow-x: auto; }   /* em telas estreitas, rola em vez de estourar */
+
+.basis-100 { flex: 0 0 100px; }
+.basis-200 { flex: 0 0 200px; }
+.basis-resto { flex: 1; }
+
+/* ===== align-self ===== */
+.fx-self {
+  min-height: 150px;
+  align-items: flex-start;
+}
+
+.self-center  { align-self: center; }
+.self-end     { align-self: flex-end; }
+.self-stretch { align-self: stretch; }
+
+/* ===== order ===== */
+.ordem-1 { order: 1; }
+.ordem-2 { order: 2; }
+.ordem-3 { order: 3; }
+
+/* ===== Aplicação 1: centralizar ===== */
+.fx-centro {
+  height: 160px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===== Aplicação 2: barra de navegação ===== */
+.nav-demo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-top: 8px;
+}
+
+.nav-demo .logo {
+  color: #00d8ff;
+  font-size: 1.1rem;
+}
+
+.nav-demo .empurra {
+  margin-left: auto;
+}
+
+/* ===== Aplicação 3: cards que quebram linha ===== */
+.fx-cards {
+  flex-wrap: wrap;
+}
+
+.fx-cards > div {
+  flex: 1 1 180px;
+  padding: 24px 18px;
+}
+
+/* ===== Teste prático ===== */
+.fx-lab {
+  display: flex;
+  gap: 10px;
+  min-height: 160px;
+  /* ALTERE AQUI: justify-content, align-items, flex-wrap, flex-direction... */
+}
+
+.fx-lab > div {
+  width: 90px;
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 600px) {
+  .fx-ac {
+    height: 260px;
+  }
+}

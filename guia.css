@@ -1,0 +1,159 @@
+/* =====================================================
+   guia.css — estilos compartilhados das páginas
+   "Flexbox na Prática" e "Grid na Prática"
+   ===================================================== */
+
+/* ===== Tipografia e blocos de texto ===== */
+.guia h2 {
+  color: #00d8ff;
+  margin: 40px 0 12px;
+  font-size: 1.5rem;
+}
+
+.guia h3 {
+  color: #fff;
+  margin: 28px 0 8px;
+  font-size: 1.15rem;
+}
+
+.guia p {
+  line-height: 1.7;
+  margin: 10px 0;
+  opacity: 0.92;
+}
+
+.guia ul,
+.guia ol {
+  margin: 10px 0 10px 22px;
+  line-height: 1.7;
+}
+
+/* ===== Código ===== */
+.guia code {
+  background: rgba(0, 0, 0, 0.35);
+  color: #9be7ff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 0.92em;
+}
+
+.guia pre {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 16px;
+  margin: 12px 0;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+.guia pre code {
+  background: none;
+  padding: 0;
+}
+
+/* ===== Sumário (links âncora) ===== */
+.sumario {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.sumario a {
+  text-decoration: none;
+  color: #00d8ff;
+  border: 1px solid rgba(0, 216, 255, 0.4);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.sumario a:hover {
+  background: rgba(0, 216, 255, 0.15);
+  color: #fff;
+}
+
+/* ===== Caixa de dica ===== */
+.dica {
+  border-left: 4px solid #00d8ff;
+  background: rgba(0, 216, 255, 0.08);
+  border-radius: 0 10px 10px 0;
+  padding: 12px 16px;
+  margin: 14px 0;
+  line-height: 1.6;
+}
+
+/* ===== Tabelas ===== */
+.tabela-wrap {
+  overflow-x: auto;
+  margin: 14px 0;
+}
+
+.guia table {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: collapse;
+}
+
+.guia th,
+.guia td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  vertical-align: top;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.guia th {
+  color: #00d8ff;
+}
+
+/* ===== Demonstrações (base) ===== */
+.rotulo {
+  margin: 18px 0 0;
+  font-size: 0.95rem;
+}
+
+.demo {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 8px;
+}
+
+.demo > div {
+  background: #00d8ff;
+  color: #000;
+  font-weight: bold;
+  border-radius: 6px;
+  text-align: center;
+  padding: 12px 18px;
+}
+
+/* ===== Navegação entre páginas ===== */
+.navegacao {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 50px;
+}
+
+.navegacao .back-link {
+  margin-top: 0;
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 600px) {
+  .content-container {
+    padding: 18px;
+  }
+
+  .guia h2 {
+    font-size: 1.3rem;
+  }
+}
